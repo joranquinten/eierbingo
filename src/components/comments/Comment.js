@@ -12,19 +12,15 @@ class Comment extends React.Component {
   render() {
 
     const comment = this.props.comment;
-
-    const commentId = comment.id;
-    const commentName = comment.name;
-    const commentMsg = comment.comment;
     const commentTimestamp = moment.unix(comment.timestamp).fromNow();
 
     return (
-        <section className="panel panel-default">
-            <header>Comment ({commentId}) from { commentName }</header>
-            <div>
-                { commentMsg }
+        <section className="comment">
+            <header><a name="comment-{ comment.id }">{ comment.name }</a></header>
+            <div className="message">
+                { comment.comment }
             </div>
-            <footer>{ commentTimestamp }</footer>
+            <footer>Toegevoegd: { commentTimestamp }</footer>
         </section>
         
     )

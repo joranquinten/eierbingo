@@ -17,11 +17,20 @@ componentDidMount(){
   render() {
 
     return (
-        <div className="panel panel-default">
+        <div className="commentAdd">
+            <p>Neem deel aan de discussie:</p>
             <form>
-                <input ref="commentName" type="text" />
-                <input ref="commentComment" type="text" />
-                <button type="submit" onClick={this.onSubmit}>Add</button>
+                <fieldset>
+                    <label htmlFor="commentName">Je naam</label>
+                    <input ref="commentName" required id="commentName" type="text" placeholder="Je naam" />
+                </fieldset>
+                
+                <fieldset>
+                    <label htmlFor="commentComment">Je klacht over het weer</label>
+                    <textarea ref="commentComment" required id="commentComment"></textarea>
+                </fieldset>
+
+                <button type="submit" onClick={ this.onSubmit }>Toevoegen</button>
             </form>
         </div>
         
@@ -30,16 +39,19 @@ componentDidMount(){
 
 onSubmit(event){
     event.preventDefault();
+    
     const inputName = ReactDOM.findDOMNode(this.refs.commentName);
     const inputComment = ReactDOM.findDOMNode(this.refs.commentComment);
 
-    const newComment = {
-        name: inputName.value,
-        comment: inputComment.value
-    };
-    this.props.addComment({ newComment });
-    inputName.value = '';
-    inputComment.value ='';
+    if (inputName.value !== '' && inputComment.value !== '') {
+        const newComment = {
+            name: inputName.value,
+            comment: inputComment.value
+        };
+        this.props.addComment({ newComment });
+        inputName.value = '';
+        inputComment.value ='';
+    }
   }
 
 }

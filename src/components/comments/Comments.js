@@ -1,6 +1,8 @@
 import React from 'react';
 import Comment from './Comment.js';
 
+import './comments.css';
+
 // comment component, renders the individual comments from props
 class Comments extends React.Component {
 
@@ -16,7 +18,7 @@ class Comments extends React.Component {
     }
 
     return (
-        <div>
+        <div className="comments">
             { comments }
         </div>
     )

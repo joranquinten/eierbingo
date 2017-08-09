@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import Comments from './components/Comments.js';
-import CommentAdd from './components/CommentAdd.js';
+import Comments from './components/comments/Comments.js';
+import CommentAdd from './components/comments/CommentAdd.js';
+
+import WeatherWidget from './components/weather/WeatherWidget';
+
 import moment from 'moment';
 
 import './App.css';
@@ -21,8 +24,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Commenteer</h2>
+          <h2>Dutch Weather Complain Service</h2>
         </div>
+        <WeatherWidget city="eindhoven" />
         <Comments allComments={ allComments } />
         <CommentAdd addComment={ this.addComment } />
       </div>

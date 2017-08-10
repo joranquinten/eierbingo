@@ -14,12 +14,16 @@ import './App.css';
 const fakeComments = [{
     id: 1,
     name: 'John Doe',
+    email: 'john@johndoe.com',
+    gender: 'Man',
     comment: 'Wat een ontzettend lekker weer vandaag!',
     timestamp: 1502230980
   },
   {
     id: 2,
     name: 'Jane Doe',
+    email: 'jane@johndoe.com',
+    gender: 'Vrouw',
     comment: 'Het is wel erg benauwd. Dat heb je in Nederland, is het warm, dan is het meteen zo benauwd. Bah!',
     timestamp: 1502276225
   }

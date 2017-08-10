@@ -17,7 +17,7 @@ class Comment extends React.Component {
 
     return (
         <section className="comment">
-            <header><a name="comment-{ comment.id }">{ comment.name }</a></header>
+            <header><a href="mailto:{ comment.email }" name="comment-{ comment.id }">{ comment.name }</a> ({comment.gender})</header>
             <div className="message">
                 { comment.comment }
             </div>

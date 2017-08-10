@@ -9,6 +9,9 @@ class CommentAdd extends React.Component {
         // Register the methods
 
         // Manual bind (autobinding is provided via React.createClass())
+        this._handleChange = this._handleChange.bind(this);
+
+        // Manual bind (autobinding is provided via React.createClass())
         this._onSubmit = this._onSubmit.bind(this);
     }
 
@@ -28,6 +31,18 @@ class CommentAdd extends React.Component {
                         <label htmlFor="commentName">Je naam</label>
                         <input ref="commentName" required id="commentName" type="text" placeholder="Je naam" />
                     </fieldset>
+
+                    <fieldset>
+                        <label htmlFor="commentEmail">Je emailadres</label>
+                        <input ref="commentEmail" required id="commentEmail" type="email" placeholder="Je emailadres" />
+                    </fieldset>
+
+                    <fieldset>
+                        <label htmlFor="commentGender_Neutral">Je geslacht</label><br/>
+                        <div className="radio"><input ref="commentGender" name="commentGender" value="man" id="commentGender_Male" type="radio" onChange={ this._handleChange } /><label htmlFor="commentGender_Male">Man</label></div>
+                        <div className="radio"><input ref="commentGender" name="commentGender" value="neutraal" id="commentGender_Neutral" type="radio" onChange={ this._handleChange } /><label htmlFor="commentGender_Neutral">Neutraal</label></div>
+                        <div className="radio"><input ref="commentGender" name="commentGender" value="vrouw" id="commentGender_Female" type="radio" onChange={ this._handleChange } /><label htmlFor="commentGender_Female">Vrouw</label></div>
+                    </fieldset>
                     
                     <fieldset>
                         <label htmlFor="commentComment">Je klacht over het weer</label>
@@ -41,20 +56,31 @@ class CommentAdd extends React.Component {
         )
     }
 
+    // Capture the change on radio
+    _handleChange(event) {
+        let currentGender = event.target.value.trim();
+        this.setState({
+            gender: currentGender   
+        });
+    }
+
     _onSubmit(event) {
 
         event.preventDefault();
 
         // Reference the inputs
         const inputName = ReactDOM.findDOMNode(this.refs.commentName);
+        const inputEmail = ReactDOM.findDOMNode(this.refs.commentEmail);
         const inputComment = ReactDOM.findDOMNode(this.refs.commentComment);
 
         // Basic validation
-        if (inputName.value !== '' && inputComment.value !== '') {
+        if (inputName.value !== '' && inputEmail.value !== '' && this.state.gender !== '' && inputComment.value !== '') {
 
             // Define the commentObject to be added
             const newComment = {
                 name: inputName.value,
+                email: inputEmail.value,
+                gender: this.state.gender,
                 comment: inputComment.value
             };
 
@@ -65,6 +91,7 @@ class CommentAdd extends React.Component {
 
             // Reset the input values
             inputName.value = '';
+            inputEmail.value = '';
             inputComment.value = '';
         }
     }

@@ -55,6 +55,16 @@
     font-family: 'Slabo 27px', serif;
 }
 
+.commentAdd form fieldset .radio input {
+    display: inline-block;
+    width: 7%;
+}
+
+.commentAdd form fieldset .radio label {
+    display: inline-block;
+    width: 70%;
+}
+
 .commentAdd form fieldset textarea {
     display: block;
     padding: 3% 5%;

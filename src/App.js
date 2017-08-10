@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Comments from './components/comments/Comments.js';
-import CommentAdd from './components/comments/CommentAdd.js';
+import Comments from './components/comments/Comments';
+import CommentAdd from './components/comments/CommentAdd';
+import CommentsClear from './components/comments/CommentsClear';
 
 import WeatherWidget from './components/weather/WeatherWidget';
 
@@ -10,12 +11,27 @@ import sun from './sun.svg';
 import './App.css';
 
 // Fake a JSON endpoint
-const allComments = [
-        { id: 1, name:'John Doe', comment:'Wat een ontzettend lekker weer vandaag!', timestamp: 1502230980 },
-        { id: 2, name:'Jane Doe', comment:'Het is wel erg benauwd. Dat heb je in Nederland, is het warm, dan is het meteen zo benauwd. Bah!', timestamp: 1502276225 }
-      ];
+const fakeComments = [{
+    id: 1,
+    name: 'John Doe',
+    comment: 'Wat een ontzettend lekker weer vandaag!',
+    timestamp: 1502230980
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    comment: 'Het is wel erg benauwd. Dat heb je in Nederland, is het warm, dan is het meteen zo benauwd. Bah!',
+    timestamp: 1502276225
+  }
+];
 
+// If comments exist in localStorage, display from localStorage (mimics saving of comments in a backend service)
+const fromLocalStorage = JSON.parse(window.localStorage.getItem('allComments'));
+let allComments = fromLocalStorage ? fromLocalStorage : fakeComments;
+
+// App component, combines the components to an app
 class App extends Component {
+
   constructor(props) {
     super(props);
     
@@ -23,10 +39,15 @@ class App extends Component {
     this.state = { allComments };
 
     // Manual bind (autobinding is provided via React.createClass())
-    this.addComment = this.addComment.bind(this); 
+    this._addComment = this._addComment.bind(this); 
+    this._clearComments = this._clearComments.bind(this);
+
   }
 
   render() {
+
+    const clearCommentsButton = (allComments.length > 2) ? <CommentsClear clearComments={ this._clearComments } /> : null;
+
     return (
       <div className="App">
         <div className="App-header">
@@ -38,7 +59,8 @@ class App extends Component {
         
         <div className="widget">
           <Comments allComments={ allComments } />
-          <CommentAdd addComment={ this.addComment } />
+          <CommentAdd addComment={ this._addComment } />
+          { clearCommentsButton }
         </div>
       </div>
     );
@@ -47,7 +69,7 @@ class App extends Component {
   /*
     Expects a comment object with a name and comment
   */
-  addComment(comment) {
+  _addComment(comment) {
 
     /*
     Simulate a call to a backend and mimic the expected response:
@@ -55,7 +77,6 @@ class App extends Component {
 
     // Get a new ID:
     const newId = (this.state.allComments.sort((a,b) => {return (a.id<b.id)}))[0].id + 1;
-
     comment.newComment.id = newId;
 
     // Mimic some sort of unix timestamp to the comment
@@ -69,10 +90,25 @@ class App extends Component {
       return (a.timestamp > b.timestamp);
     });
 
+    // Save to localStorage for retrieval upon revisit
+    window.localStorage.setItem('allComments', JSON.stringify(allComments));
+
     // Update the state
     this.setState({ allComments });
   }
 
+  /*
+    Removes the values from localStorage, defaults to fakeComments
+  */
+  _clearComments() {
+
+    // Remove from localStorage
+    window.localStorage.removeItem('allComments');
+
+    // Reset to display the fakeComments again
+    allComments = fakeComments;
+    this.setState({ allComments });
+  }
 
 }
 

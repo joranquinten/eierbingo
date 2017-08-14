@@ -4,26 +4,30 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 120s linear;
   height: 100px;
 }
 
 .App-header {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,7db9e8+65,7db9e8+65,71bf67+66,4b753f+100 */
-  background: #1e5799; /* Old browsers */
-  background: -moz-linear-gradient(top, #1e5799 0%, #7db9e8 65%, #7db9e8 65%, #71bf67 66%, #4b753f 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #1e5799 0%,#7db9e8 65%,#7db9e8 65%,#71bf67 66%,#4b753f 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #1e5799 0%,#7db9e8 65%,#7db9e8 65%,#71bf67 66%,#4b753f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#4b753f',GradientType=0 ); /* IE6-9 */
-  height: 150px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#416a99+0,1e5799+33,1e5799+100 */
+background: #416a99; /* Old browsers */
+background: -moz-linear-gradient(top, #416a99 0%, #1e5799 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #416a99 0%,#1e5799 33%,#1e5799 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #416a99 0%,#1e5799 33%,#1e5799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#416a99', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
+  min-height: 150px;
   padding: 20px;
   color: white;
   min-width: 325px;
-  font-family: 'Slabo 27px', serif;
 }
 
-.App-header h2 {
+.App-header h1 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 4em;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.App-disclaimer {
+  font-size: smaller;
 }
 
 .widget {
@@ -34,10 +38,6 @@
   margin: 0.4em auto;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   background: #fff;
-  width: 325px;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  min-width: 325px;
+  max-width: 600px;
 }

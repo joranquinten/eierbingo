@@ -21,8 +21,8 @@ class CheckCode extends React.Component {
     render() {
 
         return (
-            <div className="UserCode">
-                <p>Heb je bingo?</p>
+            <div className="widget UserCode">
+                <p className="Form-intro">Heb je bingo?</p>
                 <form>
                     <fieldset>
                         <label htmlFor="userCode">Vul je eiercode in:</label>
@@ -34,13 +34,13 @@ class CheckCode extends React.Component {
     
         )
     }
-
+    
     _onSubmit(event) {
 
         event.preventDefault();
 
         // Reference the inputs
-        const userCode = ReactDOM.findDOMNode(this.refs.userCode);
+        let userCode = ReactDOM.findDOMNode(this.refs.userCode);
 
         // Basic validation
         if (userCode.value) {
@@ -49,7 +49,8 @@ class CheckCode extends React.Component {
             this.props.checkCode(userCode.value);
 
             // Reset the input values
-            userCode.value = '';
+            //userCode.value = '';
+            ReactDOM.findDOMNode(this.refs.userCode).focus();
         }
     }
 
